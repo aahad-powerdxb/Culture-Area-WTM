@@ -1,5 +1,3 @@
-// In NavigationManager.cs
-
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -19,6 +17,7 @@ public class NavigationManager : MonoBehaviour
 
     // --- UI References for Main Panel ---
     public GameObject mainButtonContainer;
+    public GameObject centeredLastPanel; // NEW: Assign your horizontal layout panel here
     public GameObject mainButtonPrefab;
 
     // --- UI References for Showcase Panel ---
@@ -27,7 +26,6 @@ public class NavigationManager : MonoBehaviour
     public Image showcaseImage;
 
     // --- Private Variables ---
-    // REMOVED: The navigation history list is no longer needed
     private ExploreDataContent _cultureAreaData; // Holds the parsed data
 
     void Awake()
@@ -55,13 +53,33 @@ public class NavigationManager : MonoBehaviour
     // --- Populates the MAIN screen buttons ---
     void PopulateMainPanel()
     {
-        if (_cultureAreaData == null) return;
+        if (_cultureAreaData == null || _cultureAreaData.buttons == null) return;
 
+        // Clear existing children from BOTH containers
         foreach (Transform child in mainButtonContainer.transform) Destroy(child.gameObject);
-
-        foreach (ButtonData buttonData in _cultureAreaData.buttons)
+        if (centeredLastPanel != null)
         {
-            GameObject buttonInstance = Instantiate(mainButtonPrefab, mainButtonContainer.transform);
+            foreach (Transform child in centeredLastPanel.transform) Destroy(child.gameObject);
+        }
+
+        int totalButtons = _cultureAreaData.buttons.Count;
+        bool isOdd = totalButtons % 2 != 0;
+
+        for (int i = 0; i < totalButtons; i++)
+        {
+            ButtonData buttonData = _cultureAreaData.buttons[i];
+            
+            // Default target is the main grid container
+            Transform targetContainer = mainButtonContainer.transform;
+
+            // If the total count is odd AND this is the very last button, change the target
+            if (isOdd && i == totalButtons - 1 && centeredLastPanel != null)
+            {
+                targetContainer = centeredLastPanel.transform;
+            }
+
+            // Instantiate the button inside the chosen container
+            GameObject buttonInstance = Instantiate(mainButtonPrefab, targetContainer);
             SetupMainButton(buttonInstance, buttonData);
         }
     }
@@ -132,28 +150,19 @@ public class NavigationManager : MonoBehaviour
 
     // --- Back and Home Button Logic ---
 
-    // REMOVED: The GoBack() function is no longer needed.
-
     public void GoHome()
     {
-        // Hide the showcase panel
         showcasePanel.SetActive(false);
-        // Show the home panel
         alAinPanel.SetActive(true);
     }
 
     // --- Helper Function ---
 
-    // SIMPLIFIED: ShowPanel no longer manages history
     private void ShowPanel(GameObject panelToShow)
     {
-        // Hide the home panel
         alAinPanel.SetActive(false);
-
-        // Show the new panel
         panelToShow.SetActive(true);
 
-        // Reset scroll position
         var scrollRect = panelToShow.GetComponentInChildren<ScrollRect>();
         if (scrollRect != null)
         {

@@ -3,16 +3,10 @@
   "title": "Culture & Area",
   "buttons": [
     {
-      "name": "Oud",
-      "content": "Meaning 'from wood' in Arabic, the pear-shaped oud is one of mankind's oldest stringed instruments. Central to the Middle Eastern music tradition and defining the instrumental culture of Abu Dhabi and the wider United Arab Emirates, the oud is often used for entertainment at social gatherings and events. Dedicated to its preservation, Abu Dhabi’s Bait Al Oud music academy focuses on the study and teaching of the oud and other Arabic instruments, providing music lessons and courses as well as teaching the skills and process of making an oud by hand.",
-      "imageStr": "Oud Player image",
-      "iconStr": "Oud Player Icon"
-    },
-    {
       "name": "Bait Al Gahwa",
       "content": "Arabic coffee (known as Gahwa in the Emirati Arabic dialect) has been a central part of Arab culture for centuries, with its preparation and serving marked by elaborate traditions. This initiative is a cultural experience that showcases the traditional methods and rituals of preparing and serving Arabic Gahwa to guests—a living testament to the hospitality passed down through generations. Its importance goes beyond honouring guests; it symbolizes the strength of the social, political, and cultural bonds that shape the Emirati community. It explores each phase of Gahwa preparation, from roasting, cooling, and grinding the beans, to boiling, infusing with distinct flavours, and finally the ceremonial serving. Every stage is guided by specific customs and tools, governed by unique social etiquette in the United Arab Emirates.",
       "imageStr": "Bait Al Gahwa Image",
-      "iconStr": "Intangible Heritage - Gahwa - Modheef (The Host)"
+      "iconStr": "Updated Bait Al Ghawa"
     },
     {
       "name": "Perfume",
